@@ -86,7 +86,7 @@ function first() {
 
 function second() {
     document.getElementById('fourth').innerHTML = '';
-    if(document.getElementById('second').innerHTML !== ''){
+    if (document.getElementById('second').innerHTML !== '') {
         return 0;
     }
 
@@ -128,7 +128,7 @@ function second() {
     }
     const div = document.getElementById('second');
     const p = document.createElement('p');
-    p.innerHTML = 'Заполните матрицу сравнений';
+    p.innerHTML = 'Заполните матрицу сравнений (нажмите на незаполненную ячейку - 0 или на ту, которую хотите изменить; изменять исходные данные не получится)';
     div.append(p);
     div.append(table);
     let thead = document.createElement("thead");
@@ -194,7 +194,7 @@ function second() {
                         select.id = 'select001' + i + j;
                         this.innerHTML = '';
                         this.appendChild(select);
-                        fillingOptions(select.id, 1, numberOfCriterion, 2);
+                        fillingOptions(select.id, 1, 3, 2);
 
                         let this_td = this;
                         select.addEventListener('blur', function () {
@@ -254,8 +254,8 @@ function third() {
         for (let j = 0; j < (numberOfCriterion - 1) * (numberOfCriterion); j++) {
             let element = document.getElementById('secondTable').getElementsByTagName('tbody')[0].getElementsByTagName('tr')[i].getElementsByTagName('td')[j];
             if (element.innerHTML === '0') {
-                //alert('Заполните все поля с 0!');
-                //return 0;
+                alert('Заполните все поля с 0!');
+                return 0;
             }
             if (element.innerHTML === '1') {
                 characterise[i][1]++;
@@ -369,11 +369,11 @@ function fourth() {
     let finalMas = [];
     for (let i = 0; i < numberOfAlternatives; i++) {
         finalMas[i] = [];
-        finalMas[i][0] = document.getElementById('fourth').getElementsByTagName('tbody')[0].getElementsByTagName('tr')[i].getElementsByTagName('td')[2].innerHTML;
+        finalMas[i][0] = parseInt(document.getElementById('fourth').getElementsByTagName('tbody')[0].getElementsByTagName('tr')[i].getElementsByTagName('td')[2].innerHTML);
         finalMas[i][1] = i;
     }
     finalMas.sort((a, b) => {
-        return a - b;
+        return a[0] - b[0];
     });
     p.innerHTML = 'Лучшая альтернатива: ';
     let bool = true;
